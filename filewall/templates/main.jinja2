@@ -1,0 +1,46 @@
+{% extends "druids/base.jinja2" %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ base_path }}/static/css/gallery.css">
+{% endblock %}
+{% block tabs %}
+    <druid-tabs active="gallery">
+        <druid-tab panel="gallery">Gallery</druid-tab>
+        <druid-tab panel="log">Log</druid-tab>
+    </druid-tabs>
+{% endblock %}
+{% block content %}
+    <section data-tab-panel="gallery" class="df-tab-panel active fw-gallery">
+        <div class="df-toolbar fw-toolbar">
+            <span id="file-count" class="df-muted"></span>
+            <span class="df-spacer"></span>
+            <druid-button id="folder-toggle" toggle>
+                folders
+            </druid-button>
+            <druid-button id="filter-toggle" toggle active>
+                images
+            </druid-button>
+            <druid-button id="select-all">
+                select all
+            </druid-button>
+            <druid-button id="download-selected" disabled>
+                download
+            </druid-button>
+            <druid-button id="delete-selected" variant="soft-danger" disabled>
+                delete
+            </druid-button>
+            <druid-icon-button id="gallery-refresh" icon="refresh" label="Refresh"></druid-icon-button>
+        </div>
+        <div class="file-wrap">
+            <div id="file-grid" class="file-grid">
+            </div>
+        </div>
+    </section>
+    <section data-tab-panel="log" class="df-tab-panel">
+        <druid-log-view src="{{ base_path }}/api/log" poll="5" boxed heading="Application Log"></druid-log-view>
+    </section>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ base_path }}/static/js/util.js"></script>
+    <script src="{{ base_path }}/static/js/gallery.js"></script>
+    <script src="{{ base_path }}/static/js/app.js"></script>
+{% endblock %}

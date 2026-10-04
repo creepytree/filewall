@@ -1,0 +1,22 @@
+services:
+  filewall:
+    container_name: filewall
+    image: bitdruid/filewall:latest
+    #build:
+    #  context: .
+    #  dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      - DATA_DIR=/data    # Folder shown in the gallery
+      - BASE_PATH=        # Public base path, e.g. /subdir1/app
+      - LOG_LEVEL=DEBUG   # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+      # Optional static single-user login. Sessions are kept in memory only.
+      - LOGIN=true        # Set false to disable login
+      - LOGIN_USER=admin  # Username
+      - LOGIN_PW=admin    # Password
+      - LOGIN_TIMEOUT=60  # Session idle timeout in minutes
+    volumes:
+      - ./data:/data                       # the browsed folder (bind-mount anything here)
+      - ./instance:/app/filewall/instance  # rotating log file + thumbnail cache
+    restart: unless-stopped

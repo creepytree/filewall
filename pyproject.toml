@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling >= 1.26", "hatch-requirements-txt"]
+build-backend = "hatchling.build"
+
+
+[project]
+name = "filewall"
+version = "1.0.0"
+description = "Super simple web-gallery for a mounted folder"
+requires-python = ">=3.13"
+dynamic = ["dependencies"]
+
+
+[[project.authors]]
+name = "bitdruid"
+email = "bitdruid@outlook.com"
+
+
+[project.urls]
+homepage = "https://github.com/bitdruid/filewall"
+
+
+[project.scripts]
+filewall = "filewall.start:main"
+
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+
+[tool.hatch.metadata.hooks.requirements_txt]
+file = "requirements.txt"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["filewall"]
+artifacts = ["filewall/static/**", "filewall/templates/**"]
+
+
+[tool.djlint]
+profile = "jinja"
+# H006: lightbox img is sized by css; H020: tbody elements are filled by app.js; H023: entity icons; H030/H031: internal tool, no SEO meta
+ignore = "H006,H020,H023,H030,H031"
+max_line_length = 120
+max_attribute_length = 120
+format_js = true
+format_css = true
+indent = 20
+use_gitignore = true
+line_break_after_multiline_tag = true
+max_blank_lines = 5
+
+
+[tool.ruff]
+line-length = 120
